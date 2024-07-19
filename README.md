@@ -2,13 +2,41 @@
 
 Deploy a container using AWS ECS with an ALB in front of it
 
+## To Deploy
+
+run `terraform apply --var-file=my.tfvars`
+
+### Sample tfvars file
+
+```
+vpc_id            = "vpc-abc123"
+alb_subnets       = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
+ecs_subnets       = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
+region            = "us-west-2"
+desired_count     = 1
+env               = "test"
+image             = "nginx/nginx:latest"
+container_port    = 80
+name              = "tf-ecr"
+
+# ECR settings
+#use_ecr           = true
+#ecr_region        = "us-west-2"
+#ecr_repo_name     = "my-ecr-repo"
+#ecr_tag           = "latest"
+
+# ALB configs
+allow_cloudflare          = false
+https_redirect_enabled    = false
+
+```
+
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.62.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.0 |
 
 ## Providers
 
